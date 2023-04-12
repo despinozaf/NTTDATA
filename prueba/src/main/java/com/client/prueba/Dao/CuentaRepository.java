@@ -18,4 +18,5 @@ public interface CuentaRepository extends JpaRepository<Cuenta, Long> {
     BigDecimal findSaldoInicial(@Param("numerocuenta") int numerocuenta);
 
 
+
 }

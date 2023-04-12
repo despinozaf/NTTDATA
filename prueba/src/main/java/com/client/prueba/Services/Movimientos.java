@@ -7,16 +7,19 @@ import com.client.prueba.modelo.Movimiento;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 
+@Service
 public class Movimientos implements MethodsResponse {
 
     @Autowired
     GeneralDao service;
+
 
     MethodsResponse methodsResponse;
 

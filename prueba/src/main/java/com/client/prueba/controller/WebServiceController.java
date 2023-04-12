@@ -3,6 +3,7 @@ package com.client.prueba.controller;
 import com.client.prueba.Dao.GeneralDao;
 import com.client.prueba.modelo.*;
 import com.google.gson.Gson;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -25,18 +26,56 @@ import com.client.prueba.Response.MethodsResponse;
 @RequestMapping(path = "/api")
 public class WebServiceController  implements MethodsResponse {
 
-    @Autowired
-    private MessageSource mensajes;
+
     @Autowired
     GeneralDao service;
 
+    @Autowired
     Movimientos movimientos;
 
-    @GetMapping(value = "/persona/{id}")
-    public String persona(@PathVariable("id") String id){
+    @GetMapping(value = "/persona")
+    public String getPersonas(){
         List<Persona> listPersonas=service.getAllPersona();
         System.out.println(listPersonas.get(0).getIdtpersona());
         return "prueba";
+    }
+
+    @GetMapping(value = "/persona/{id}")
+    public Persona getPersona(@PathVariable("id") String id){
+        System.out.println(id);
+        return service.getPersona(id);
+    }
+
+    @DeleteMapping(value = "/persona/{id}")
+    public String deletePersona(@PathVariable("id") String id){
+        Persona per=service.getPersona(id);
+        System.out.println(per);
+        if(per!=null){
+            System.out.println(per);
+            service.deleteCliente(per.getIdtpersona());
+            service.deletePersona(per.getIdtpersona());
+            return "Persona elimina correctamente";
+        }
+        return null;
+    }
+
+    @PutMapping(value="/persona")
+    public Persona editarPersona(@RequestBody String bodyReques){
+        System.out.println(bodyReques);
+        gson = new Gson();
+        Persona persona = gson.fromJson(bodyReques, Persona.class);
+        System.out.println(persona);
+        Persona per=service.getPersona(persona.getIdentificacion());
+        System.out.println(per);
+
+        if(per!=null){
+            persona.setIdtpersona(per.getIdtpersona());
+            System.out.println(persona);
+            service.savePersona(persona);
+
+            return persona;
+        }
+        return null;
     }
 
     private Gson gson;
@@ -72,6 +111,8 @@ public class WebServiceController  implements MethodsResponse {
 
     }
 
+
+
     @PostMapping("/cuentas")
     public ResponseEntity<Object> createCuenta(@RequestBody Cuenta cuenta){
         String msgOk = "Cuenta creado correctamente";
@@ -92,7 +133,7 @@ public class WebServiceController  implements MethodsResponse {
 
     @PostMapping("/movimientos")
     public ResponseEntity<Object> createMovimiento(@RequestBody Movimiento movimiento){
-        ResponseEntity<Object> respuesta=crearMovimiento(movimiento);
+        ResponseEntity<Object> respuesta=movimientos.crearMovimiento(movimiento);
         return respuesta;
 
     }
@@ -112,42 +153,6 @@ public class WebServiceController  implements MethodsResponse {
         return service.findAllByFecha(date1, date2, fechas.getCuenta());
     }
 
-    public  ResponseEntity<Object> crearMovimiento(Movimiento movimiento){
-        System.out.println(movimiento);
-        String msgOk = "Movimiento creado correctamente";
-        String msgError = "Error al crear el movimiento";
-        String codeMsgError = "333";
-        String msgErrorS = "Saldo no disponible";
-        String codeMsgErrorS = "444";
-        String msgErrorC = "Cuenta no existe";
-        String codeMsgErrorC = "555";
-        Calendar calendar = Calendar.getInstance();
-        movimiento.setFecha(calendar.getTime());
-        System.out.println(movimiento);
-        BigDecimal saldoActual;
-        saldoActual = service.findSaldoActual(movimiento.getNumerocuenta());
-        System.out.println(saldoActual);
-        if(saldoActual == null){
-            saldoActual = service.findSaldoInicial(movimiento.getNumerocuenta());
-            if(saldoActual == null){
-                return HttpBad(msgErrorC, codeMsgErrorC);
-            }
-        }
-        if(saldoActual.signum() >= 0) {
-            movimiento.setSaldo(saldoActual.add(movimiento.getValor()));
-        } else {
-            return HttpBad(msgErrorS, codeMsgErrorS);
-        }
-        Long idMovimiento=service.saveMovimiento(movimiento);
-        if(idMovimiento>0){
-            return HttpOk(msgOk,new Gson().toJson(movimiento));
-        }else{
-            return HttpBad(msgError, codeMsgError);
-        }
-
-
-
-    }
 
 
 }

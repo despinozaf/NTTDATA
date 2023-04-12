@@ -61,6 +61,26 @@ public class GeneralDaoImp implements GeneralDao {
 	}
 
 	@Override
+	public Persona getPersona(String identificacion) {
+		return PersonaJPA.getPersona(identificacion);
+	}
+
+	@Override
+	public Cliente getCliente(Long idtpersona) {
+
+		return ClienteJPA.getCliente(idtpersona);
+	}
+
+	public void deleteCliente(Long idtpersona){
+		ClienteJPA.deleteCliente(idtpersona);
+	}
+	public void deletePersona(Long idtpersona){
+		PersonaJPA.deletePersona(idtpersona);
+	}
+
+
+
+	@Override
 	public Long saveMovimiento(Movimiento movimiento) {
 		Long id=0L;
 		MovimientoJPA.save(movimiento);

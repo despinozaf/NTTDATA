@@ -49,6 +49,9 @@ public class Persona implements Serializable {
         return idtpersona;
     }
 
+    public void setIdtpersona(Long idtpersona) {
+        this.idtpersona = idtpersona;
+    }
 
     public String getIdentificacion() {
         return identificacion;

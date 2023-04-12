@@ -12,8 +12,17 @@ import java.util.Date;
 
 public interface GeneralDao {
 	List<Persona> getAllPersona();
+
 	Long savePersona(Persona persona);
+
 	Long saveCliente(Cliente cliente);
+
+	void deleteCliente(Long idtcliente);
+
+	void deletePersona(Long idtcliente);
+	Persona getPersona(String identificacion);
+
+	Cliente getCliente(Long idtcliente);
 	Long saveCuenta(Cuenta cuenta);
 	Long saveMovimiento(Movimiento movimiento);
 	BigDecimal findSaldoActual(int numerocuenta);

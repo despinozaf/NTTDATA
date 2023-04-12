@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \n\"identificacion\":\"0834436887\", \n\"nombre\":\"David Hurtado2\", \n\"genero\":\"Masculino\" ,\n\"edad\":\"31\", \n\"direccion\":\"Cuenca\", \n\"telefono\":\"0992883555\", \n\"contrasena\":\"s.1234\",\n\"estado\":true \n} ",
+					"raw": "{ \n\"identificacion\":\"0104426879\", \n\"nombre\":\"David Espinoza\", \n\"genero\":\"Masculino\" ,\n\"edad\":\"31\", \n\"direccion\":\"Cuenca\", \n\"telefono\":\"0992883555\", \n\"contrasena\":\"s.1234\",\n\"estado\":true \n} ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -102,7 +102,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \n\"finicio\":\"2023-04-08 00:00:00\", \n\"ffin\":\"2023-04-10 00:00:00\", \n\"cuenta\":1334687934 \n} ",
+					"raw": "{ \n\"finicio\":\"2023-04-08 00:00:00\", \n\"ffin\":\"2023-04-12 00:00:00\", \n\"cuenta\":1334687934 \n} ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -119,6 +119,131 @@
 					"path": [
 						"api",
 						"movimientos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR PERSONA",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"finicio\":\"2023-04-08 00:00:00\", \n\"ffin\":\"2023-04-10 00:00:00\", \n\"cuenta\":1334687934 \n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/persona/0834436887",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"persona",
+						"0834436887"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR CLIENTE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"finicio\":\"2023-04-08 00:00:00\", \n\"ffin\":\"2023-04-10 00:00:00\", \n\"cuenta\":1334687934 \n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cliente/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cliente",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ELIMINAR PERSONA",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/persona/0834436887",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"persona",
+						"0834436887"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MODIFICAR PERSONAS",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"identificacion\":\"0104426879\", \n\"nombre\":\"David Hurtado2\", \n\"genero\":\"Masculino\" ,\n\"edad\":\"31\", \n\"direccion\":\"Cuenca\", \n\"telefono\":\"0992883555\", \n\"contrasena\":\"s.1234\",\n\"estado\":true \n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"persona"
 					]
 				}
 			},
